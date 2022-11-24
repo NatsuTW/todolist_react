@@ -27,7 +27,7 @@ const dummyTodos = [
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState(dummyTodos);
-  const todoNum = todos.length
+  const todoNum = todos.length;
 
   const handleChange = (value) => {
     setInputValue(value);
@@ -99,26 +99,26 @@ const TodoPage = () => {
     });
   };
 
-  const handleSave = ({id, title}) => {
+  const handleSave = ({ id, title }) => {
     setTodos((preTodos) => {
       return preTodos.map((todo) => {
-        if(todo.id === id) {
+        if (todo.id === id) {
           return {
             ...todo,
             title,
             isEdit: false,
-          }
+          };
         }
-        return todo
-      })
-    })
-  }
+        return todo;
+      });
+    });
+  };
 
   const handleDelete = (id) => {
     setTodos((preTodos) => {
-      return preTodos.filter((todo) => todo.id !== id)
-    })
-  }
+      return preTodos.filter((todo) => todo.id !== id);
+    });
+  };
 
   return (
     <div>
@@ -137,7 +137,7 @@ const TodoPage = () => {
         onSave={handleSave}
         onDelete={handleDelete}
       />
-      <Footer todoNum={todoNum}/>
+      <Footer todoNum={todoNum} />
     </div>
   );
 };
