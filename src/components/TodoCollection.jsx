@@ -19,6 +19,7 @@ const TodoCollection = ({
               onChangeMode?.({ id, isEdit });
             }}
             onSave={({ id, title }) => onSave?.({ id, title })}
+            onDelete={(id) => onDelete?.(id)}
           />
         );
       })}
