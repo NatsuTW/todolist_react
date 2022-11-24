@@ -33,7 +33,7 @@ const TodoPage = () => {
   };
 
   const handleAddTodo = () => {
-    if(inputValue.length === 0) {
+    if (inputValue.length === 0) {
       return;
     }
 
@@ -44,12 +44,12 @@ const TodoPage = () => {
           id: Math.random() * 100,
           title: inputValue,
           isDone: false,
-        }
-      ]
-    })
+        },
+      ];
+    });
     //clear input box
-    setInputValue('')
-  } 
+    setInputValue('');
+  };
 
   const handleKeyDown = () => {
     if (inputValue.length === 0) {
@@ -68,21 +68,36 @@ const TodoPage = () => {
     });
     //clear input box
     setInputValue('');
-  }; 
+  };
 
   const handleToggleDone = (id) => {
     setTodos((preTodos) => {
-      return preTodos.map(todo => {
-        if(todo.id === id) {
+      return preTodos.map((todo) => {
+        if (todo.id === id) {
           return {
             ...todo,
-            isDone: !todo.isDone
-          }          
+            isDone: !todo.isDone,
+          };
         }
         return todo;
-      })
-    })
-  }
+      });
+    });
+  };
+
+  const handleChangeMode = ({ id, isEdit }) => {
+    console.log("hello")
+    setTodos((preTodos) => {
+      return preTodos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            isEdit,
+          };
+        }
+        return { ...todo, isEdit: false };
+      });
+    });
+  };
 
   return (
     <div>
@@ -94,7 +109,11 @@ const TodoPage = () => {
         onAddTodo={handleAddTodo}
         onKeyDown={handleKeyDown}
       />
-      <TodoCollection todos={todos} onToggleDone={handleToggleDone}/>
+      <TodoCollection
+        todos={todos}
+        onToggleDone={handleToggleDone}
+        onChangeMode={handleChangeMode}
+      />
       <Footer />
     </div>
   );
