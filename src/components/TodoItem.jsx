@@ -129,7 +129,7 @@ const TodoItem = ({ todo, onToggleDone, onSave, onDelete, onChangeMode }) => {
         <input className="task-item-body-input" defaultValue={todo.title} ref={inputRef} onKeyDown={handleKeyDown}/>
       </div>
       <div className="task-item-action ">
-        <button className="btn-reset btn-destroy icon"></button>
+        <button className="btn-reset btn-destroy icon" onClick={() => onDelete?.(todo.id)}></button>
       </div>
     </StyledTaskItem>
   );
