@@ -126,7 +126,7 @@ const TodoItem = ({ todo, onToggleDone, onSave, onDelete, onChangeMode }) => {
       </div>
       <div className="task-item-body" onDoubleClick={() => onChangeMode?.({ id: todo.id, isEdit: true })}>
         <span className="task-item-body-text">{todo.title}</span>
-        <input className="task-item-body-input" value={todo.title} ref={inputRef} onKeyDown={handleKeyDown}/>
+        <input className="task-item-body-input" defaultValue={todo.title} ref={inputRef} onKeyDown={handleKeyDown}/>
       </div>
       <div className="task-item-action ">
         <button className="btn-reset btn-destroy icon"></button>
