@@ -85,7 +85,6 @@ const TodoPage = () => {
   };
 
   const handleChangeMode = ({ id, isEdit }) => {
-    console.log("hello")
     setTodos((preTodos) => {
       return preTodos.map((todo) => {
         if (todo.id === id) {
@@ -98,6 +97,21 @@ const TodoPage = () => {
       });
     });
   };
+
+  const handleSave = ({id, title}) => {
+    setTodos((preTodos) => {
+      return preTodos.map((todo) => {
+        if(todo.id === id) {
+          return {
+            ...todo,
+            title,
+            isEdit: false,
+          }
+        }
+        return todo
+      })
+    })
+  }
 
   return (
     <div>
@@ -113,6 +127,7 @@ const TodoPage = () => {
         todos={todos}
         onToggleDone={handleToggleDone}
         onChangeMode={handleChangeMode}
+        onSave={handleSave}
       />
       <Footer />
     </div>
