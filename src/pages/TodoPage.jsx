@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
 import { useEffect } from 'react';
-import { getTodos } from 'api/todos';
+import { createTodo, getTodos } from 'api/todos';
 
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
@@ -12,40 +12,54 @@ const TodoPage = () => {
     setInputValue(value);
   };
 
-  const handleAddTodo = () => {
+  const handleAddTodo = async () => {
     if (inputValue.length === 0) {
       return;
     }
 
-    setTodos((preTodos) => {
-      return [
-        ...preTodos,
-        {
-          id: Math.random() * 100,
-          title: inputValue,
-          isDone: false,
-        },
-      ];
-    });
+    try {
+      const data = await createTodo({ title: inputValue, isDone: false });
+
+      setTodos((preTodos) => {
+        return [
+          ...preTodos,
+          {
+            id: data.id,
+            title: data.title,
+            isDone: data.isDone,
+            isEdit: false,
+          },
+        ];
+      });
+    } catch (error) {
+      console.error(error);
+    }
     //clear input box
     setInputValue('');
   };
 
-  const handleKeyDown = () => {
+  const handleKeyDown = async () => {
     if (inputValue.length === 0) {
       return;
     }
 
-    setTodos((preTodos) => {
-      return [
-        ...preTodos,
-        {
-          id: Math.random() * 100,
-          title: inputValue,
-          isDone: false,
-        },
-      ];
-    });
+    try {
+      const data = await createTodo({ title: inputValue, isDone: false });
+
+      setTodos((preTodos) => {
+        return [
+          ...preTodos,
+          {
+            id: data.id,
+            title: data.title,
+            isDone: data.isDone,
+            isEdit: false,
+          },
+        ];
+      });
+    } catch (error) {
+      console.error(error);
+    }
     //clear input box
     setInputValue('');
   };
@@ -99,18 +113,18 @@ const TodoPage = () => {
     });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const getTodosAsync = async () => {
       try {
-        const todos = await getTodos()
+        const todos = await getTodos();
 
-        setTodos(todos.map((todo) => ({...todo, isEdit: false})))
+        setTodos(todos.map((todo) => ({ ...todo, isEdit: false })));
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
-    getTodosAsync()
-  })
+    };
+    getTodosAsync();
+  });
 
   return (
     <div>
