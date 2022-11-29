@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
 import { useEffect } from 'react';
-import { createTodo, getTodos } from 'api/todos';
+import { createTodo, getTodos, patchTodo } from 'api/todos';
+import axios from 'axios';
 
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
@@ -64,18 +65,26 @@ const TodoPage = () => {
     setInputValue('');
   };
 
-  const handleToggleDone = (id) => {
-    setTodos((preTodos) => {
-      return preTodos.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            isDone: !todo.isDone,
-          };
-        }
-        return todo;
+  const handleToggleDone = async (id) => {
+    const currentTodo = todos.find((todo) => todo.id === id);
+
+    try {
+      await patchTodo({ id, isDone: !currentTodo.isDone });
+
+      setTodos((preTodos) => {
+        return preTodos.map((todo) => {
+          if (todo.id === id) {
+            return {
+              ...todo,
+              isDone: !todo.isDone,
+            };
+          }
+          return todo;
+        });
       });
-    });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleChangeMode = ({ id, isEdit }) => {
@@ -92,19 +101,25 @@ const TodoPage = () => {
     });
   };
 
-  const handleSave = ({ id, title }) => {
-    setTodos((preTodos) => {
-      return preTodos.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            title,
-            isEdit: false,
-          };
-        }
-        return todo;
+  const handleSave = async ({ id, title }) => {
+    try {
+      await patchTodo({ id, title });
+
+      setTodos((preTodos) => {
+        return preTodos.map((todo) => {
+          if (todo.id === id) {
+            return {
+              ...todo,
+              title,
+              isEdit: false,
+            };
+          }
+          return todo;
+        });
       });
-    });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleDelete = (id) => {
