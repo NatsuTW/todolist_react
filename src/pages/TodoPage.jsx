@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
 import { useEffect } from 'react';
 import { createTodo, getTodos, patchTodo } from 'api/todos';
-import axios from 'axios';
 
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
@@ -139,7 +138,7 @@ const TodoPage = () => {
       }
     };
     getTodosAsync();
-  });
+  }, []);
 
   return (
     <div>
