@@ -10,8 +10,8 @@ import { AuthInput } from 'components';
 import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
-  const {username, setUsername} = useState('')
-  const {password, setPassword} = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <AuthContainer>
