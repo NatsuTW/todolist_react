@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   AuthContainer,
   AuthInputContainer,
@@ -10,9 +10,9 @@ import { AuthInput } from 'components';
 import { Link } from 'react-router-dom';
 
 const SignUpPage = () => {
-  const { username, setUsername } = useState('');
-  const { email, setEmail} = useState('')
-  const { password, setPassword } = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <AuthContainer>
