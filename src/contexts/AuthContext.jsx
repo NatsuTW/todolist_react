@@ -31,11 +31,11 @@ export const AuthProvider = ({ children }) => {
 
       if (result) {
         setIsAuthenticated(true);
-        const tempPayload = jwt.decode(authToken)
-        setPayload(tempPayload)
+        const tempPayload = jwt.decode(authToken);
+        setPayload(tempPayload);
       } else {
-        setIsAuthenticated(false)
-        setPayload(null)
+        setIsAuthenticated(false);
+        setPayload(null);
       }
     };
     checkTokenIsValid();
