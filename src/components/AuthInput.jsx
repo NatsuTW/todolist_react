@@ -28,12 +28,12 @@ const AuthInput = ({ type, label, value, placeholder, onChange }) => {
       <StyledLabel>{label}</StyledLabel>
       <StyledInput
         type={type || 'text'}
-        value={value}
-        placeholder={placeholder}
-        onChange={(event)=>onChange?.(event.target.value)}
+        value={value || ''}
+        placeholder={placeholder || ''}
+        onChange={(event) => onChange?.(event.target.value)}
       />
     </StyledContainer>
-  );
-};
+  ); 
+}
 
 export default AuthInput;
