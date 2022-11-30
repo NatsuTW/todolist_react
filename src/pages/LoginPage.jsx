@@ -9,6 +9,7 @@ import { ACLogoIcon } from 'assets/images';
 import { AuthInput } from 'components';
 import { Link } from 'react-router-dom';
 import { login } from 'api/auth';
+import Swal from 'sweetalert2';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -26,6 +27,22 @@ const LoginPage = () => {
 
     if (success) {
       localStorage.setItem('authToken', authToken);
+      Swal.fire({
+        title: 'Success!',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1000,
+        position: 'top',
+      });
+      return;
+    } else {
+      Swal.fire({
+        title: 'Failed...',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000,
+        position: 'top',
+      });
     }
   };
 
