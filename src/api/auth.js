@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const authUrl = 'https://todo-list.alphacamp.io/api/auth'
+const authUrl = 'https://todo-list.alphacamp.io/api/auth';
 
 export const login = async ({ username, password }) => {
   try {
@@ -16,7 +16,7 @@ export const login = async ({ username, password }) => {
     }
 
     return data;
-  } catch(error) {
-    console.error('[Login Failed]:', error)
+  } catch (error) {
+    console.error('[Login Failed]:', error);
   }
-}
+};
