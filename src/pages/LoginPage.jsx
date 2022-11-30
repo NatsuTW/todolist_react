@@ -24,7 +24,7 @@ const LoginPage = () => {
           label="帳號"
           placeholder="請輸入帳號"
           value={username}
-          onChange={(nameInput) => setUsername(nameInput)}
+          onChange={(nameInputValue) => setUsername(nameInputValue)}
         />
       </AuthInputContainer>
 
@@ -34,7 +34,7 @@ const LoginPage = () => {
           label="密碼"
           placeholder="請輸入密碼"
           value={password}
-          onChange={(passwordInput) => setPassword(passwordInput)}
+          onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </AuthInputContainer>
       <AuthButton>登入</AuthButton>
