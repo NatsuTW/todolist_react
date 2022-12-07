@@ -1,6 +1,21 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001';
+const baseUrl = 'https://todo-list.alphacamp.io/api';
+
+const axiosInstance = axios.create({baseURL: baseUrl})
+
+axiosInstance.interceptors.request.use(
+   (config)=> {
+     const token = localStorage.getItem('authToken');
+     if (token) {
+       config.headers['Authorization'] = `Bearer ${token}`;
+     }
+     return config;
+   },
+   (error)=> {
+     console.error(error);
+  },
+);
 
 export const getTodos = async ()=>{
   try {
